@@ -1,3 +1,5 @@
+mod parse;
+
 fn count_increases<T: PartialOrd>(values: &[T]) -> usize {
     values
         .windows(2)
@@ -15,22 +17,34 @@ fn smooth_data(values: &[u32], samples: usize) -> Vec<f64> {
         .collect()
 }
 
-fn numeric_lines(input: &str) -> Vec<u32> {
-    input.lines().filter_map(|line| line.parse().ok()).collect()
-}
+pub struct Solution;
 
-pub fn solution_a(input: &str) -> usize {
-    count_increases(&numeric_lines(input))
-}
+impl<'a> crate::Solution for &'a Solution {
+    type Input = Vec<u32>;
+    type Output1 = usize;
+    type Output2 = usize;
 
-pub fn solution_b(input: &str) -> usize {
-    let smoothed_data = smooth_data(&numeric_lines(input), 3);
-    count_increases(&smoothed_data)
+    fn name(&self) -> &'static str {
+        "day_1"
+    }
+
+    fn parse(&self, input: &str) -> Self::Input {
+        input.lines().filter_map(|line| line.parse().ok()).collect()
+    }
+
+    fn part_one(&self, input: &Self::Input) -> Self::Output1 {
+        count_increases(input)
+    }
+
+    fn part_two(&self, input: &Self::Input) -> Self::Output2 {
+        let smoothed_data = smooth_data(input, 3);
+        count_increases(&smoothed_data)
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::solutions::day_1a::{count_increases, smooth_data};
+    use super::*;
 
     #[test]
     fn increasing() {

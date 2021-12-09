@@ -1,11 +1,23 @@
-pub mod solutions;
+#![feature(never_type)]
 
-use solutions::day_1a;
+mod day_1;
+
+use aoc_2021::Solution;
 use std::fs;
 
-fn main() {
-    let input_1 = fs::read_to_string("./data/1a.txt").expect("Could not read input for 1a");
+fn run_solution<T: Solution>(solution: T) {
+    let name = solution.name();
+    let raw_input = fs::read_to_string(format!("./data/{}.txt", name))
+        .expect(&format!("Could not find input for {}", name));
+    let parsed_input = solution.parse(&raw_input);
 
-    println!("Day 1a answer: {}", day_1a::solution_a(&input_1));
-    println!("Day 1b answer: {}", day_1a::solution_b(&input_1));
+    let part_one_answer = solution.part_one(&parsed_input);
+    println!("{}a: {}", name, part_one_answer);
+
+    let part_two_answer = solution.part_two(&parsed_input);
+    println!("{}b: {}", name, part_two_answer);
+}
+
+fn main() {
+    run_solution(&day_1::Solution);
 }
