@@ -1,8 +1,6 @@
 #![feature(never_type)]
 
-mod day_1;
-
-use aoc_2021::Solution;
+use aoc_2021::*;
 use std::fs;
 
 fn run_solution<T: Solution>(solution: T) {
@@ -19,5 +17,6 @@ fn run_solution<T: Solution>(solution: T) {
 }
 
 fn main() {
-    run_solution(&day_1::Solution);
+    run_solution(day_1::Solution);
+    run_solution(day_2::Solution);
 }

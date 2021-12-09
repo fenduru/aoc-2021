@@ -1,5 +1,3 @@
-mod parse;
-
 fn count_increases<T: PartialOrd>(values: &[T]) -> usize {
     values
         .windows(2)
@@ -19,7 +17,7 @@ fn smooth_data(values: &[u32], samples: usize) -> Vec<f64> {
 
 pub struct Solution;
 
-impl<'a> crate::Solution for &'a Solution {
+impl crate::Solution for Solution {
     type Input = Vec<u32>;
     type Output1 = usize;
     type Output2 = usize;
