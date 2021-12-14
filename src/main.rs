@@ -19,4 +19,6 @@ fn run_solution<T: Solution>(solution: T) {
 fn main() {
     run_solution(day_1::Solution);
     run_solution(day_2::Solution);
+    // run_solution(day_3::Solution);
+    run_solution(day_4::Solution);
 }
